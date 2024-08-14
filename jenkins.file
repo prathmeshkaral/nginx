@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('code-check') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: '438a4e43-aa47-438a-bba4-083fd61a8c75', url: 'https://github.com/prathmeshkaral/nginx.git']])
+            }
+        }
+        stage('build-image') {
+            steps {
+                sh 'docker build -t nginx:b1 .'
+                sh 'docker run -itd -p 80:80 nginx:b1'
+            }
+        }
+    }
+}

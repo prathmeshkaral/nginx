@@ -1,3 +1,3 @@
 FROM httpd
-COPY index.html /var/www/html/
+COPY index.html htdocs/
 EXPOSE 80
